@@ -1,12 +1,14 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { ScrollView, View } from 'react-native';
 import { Button, SegmentedButtons, Text } from 'react-native-paper';
 
 import { PALETTE_NAMES } from '../../../const';
-import { ModePreference, PaletteName } from '../../../interface';
+import { ModePreference, PaletteName, RootStackParamList } from '../../../interface';
 import { useTheme } from '../../../theme';
 
 export const Settings = () => {
   const { theme, modePreference, setMode, palette, setPalette } = useTheme();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <ScrollView
@@ -39,6 +41,13 @@ export const Settings = () => {
             {name}
           </Button>
         ))}
+      </View>
+
+      <View style={{ gap: theme.spacing.sm }}>
+        <Text variant="titleMedium">Developer</Text>
+        <Button mode="contained-tonal" onPress={() => navigation.navigate('DesignSystem')}>
+          Open Design System
+        </Button>
       </View>
     </ScrollView>
   );

@@ -5,13 +5,18 @@ import { StatusBar } from 'expo-status-bar';
 import { ReactNode, useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
+import { en, registerTranslation } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+registerTranslation('en', en);
 import { Provider as StoreProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { ConfirmProvider } from './src/confirm';
 import { buildNavTheme, buildPaperTheme } from './src/helpers';
 import { useAppFonts } from './src/hooks';
 import { RootNavigator } from './src/router';
+import { SnackbarProvider } from './src/snackbar';
 import { persistor, store } from './src/store';
 import { ThemeProvider, useTheme } from './src/theme';
 
@@ -25,7 +30,11 @@ const ThemedShell = ({ children }: { children: ReactNode }) => {
   return (
     <PaperProvider theme={paperTheme}>
       <StatusBar style={theme.isDark ? 'light' : 'dark'} />
-      <NavigationContainer theme={navTheme}>{children}</NavigationContainer>
+      <SnackbarProvider>
+        <ConfirmProvider>
+          <NavigationContainer theme={navTheme}>{children}</NavigationContainer>
+        </ConfirmProvider>
+      </SnackbarProvider>
     </PaperProvider>
   );
 };

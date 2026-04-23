@@ -1,7 +1,8 @@
-import { createContext, useCallback, useMemo, useState } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
 import { FONT_SIZE, FONT_WEIGHT, FONTS, PALETTES, RADIUS, SPACING } from '../../const';
+import { injectWebScrollbar } from '../../helpers';
 import {
   Mode,
   ModePreference,
@@ -31,6 +32,12 @@ export const ThemeProvider = ({
       return prev === 'dark' ? 'light' : 'dark';
     });
   }, [systemScheme]);
+
+  const resolvedColors = PALETTES[palette][resolvedMode];
+
+  useEffect(() => {
+    injectWebScrollbar(resolvedColors);
+  }, [resolvedColors]);
 
   const value = useMemo<ThemeContextValue>(() => {
     const paletteDef = PALETTES[palette];
