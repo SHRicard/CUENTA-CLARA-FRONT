@@ -1,7 +1,7 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
-import { FONT_SIZE, FONT_WEIGHT, PALETTES, RADIUS, SPACING } from '../../const';
+import { FONT_SIZE, FONT_WEIGHT, FONTS, PALETTES, RADIUS, SPACING } from '../../const';
 import {
   Mode,
   ModePreference,
@@ -43,6 +43,7 @@ export const ThemeProvider = ({
       radius: RADIUS,
       fontSize: FONT_SIZE,
       fontWeight: FONT_WEIGHT,
+      fonts: FONTS,
       isDark: resolvedMode === 'dark',
     };
     return {

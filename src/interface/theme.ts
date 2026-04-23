@@ -34,6 +34,45 @@ export interface FontWeight {
   bold: string;
 }
 
+export interface InterFamily {
+  thin: string;
+  extraLight: string;
+  light: string;
+  regular: string;
+  medium: string;
+  semibold: string;
+  bold: string;
+  extraBold: string;
+  black: string;
+}
+
+export interface QuicksandFamily {
+  light: string;
+  regular: string;
+  medium: string;
+  semibold: string;
+  bold: string;
+}
+
+export interface LatoFamily {
+  thin: string;
+  thinItalic: string;
+  light: string;
+  lightItalic: string;
+  regular: string;
+  italic: string;
+  bold: string;
+  boldItalic: string;
+  black: string;
+  blackItalic: string;
+}
+
+export interface Fonts {
+  inter: InterFamily;
+  quicksand: QuicksandFamily;
+  lato: LatoFamily;
+}
+
 export type Mode = 'light' | 'dark';
 
 export type PaletteName = 'ocean' | 'forest' | 'sunset' | 'royal' | 'slate' | 'mono';
@@ -75,6 +114,7 @@ export interface Theme {
   radius: Radius;
   fontSize: FontSize;
   fontWeight: FontWeight;
+  fonts: Fonts;
   isDark: boolean;
 }
 
