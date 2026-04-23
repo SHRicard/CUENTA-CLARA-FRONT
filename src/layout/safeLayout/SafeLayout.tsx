@@ -1,31 +1,27 @@
-import { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useResponsive } from '../../hooks';
-
-export interface SafeLayoutProps {
-  children: ReactNode;
-  background?: string;
-  maxWidth?: number;
-}
-
-const DEFAULT_MAX_WIDTH = 1024;
+import { SafeLayoutProps } from '../../interface';
+import { useTheme } from '../../theme';
+import { DEFAULT_MAX_WIDTH } from '../../const';
 
 export const SafeLayout = ({
   children,
-  background = '#ffffff',
+  background,
   maxWidth = DEFAULT_MAX_WIDTH,
 }: SafeLayoutProps) => {
   const insets = useSafeAreaInsets();
   const { isWeb, isTablet, isDesktop } = useResponsive();
+  const { theme } = useTheme();
   const shouldConstrainWidth = isWeb || isTablet || isDesktop;
+  const bg = background ?? theme.colors.background;
 
   return (
     <View
       style={[
         styles.root,
         {
-          backgroundColor: background,
+          backgroundColor: bg,
           paddingTop: insets.top,
           paddingBottom: insets.bottom,
           paddingLeft: insets.left,
