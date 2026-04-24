@@ -14,6 +14,7 @@ import { DesignSystemFab } from './src/devTools';
 import { buildNavTheme, buildPaperTheme } from './src/helpers';
 import { useAppFonts } from './src/hooks';
 import { navigationRef, RootNavigator } from './src/router';
+import { configureGoogleSignIn, GoogleAuthProvider } from './src/service';
 import { SnackbarProvider } from './src/snackbar';
 import { persistor, store } from './src/store';
 import { ThemeProvider, useTheme } from './src/theme';
@@ -21,6 +22,7 @@ import { ThemeProvider, useTheme } from './src/theme';
 registerTranslation('en', en);
 
 SplashScreen.preventAutoHideAsync();
+configureGoogleSignIn();
 
 const ThemedShell = ({ children }: { children: ReactNode }) => {
   const { theme } = useTheme();
@@ -56,18 +58,20 @@ export default function App() {
   }
 
   return (
-    <StoreProvider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <SafeAreaProvider>
-            <ThemeProvider defaultPalette="ocean" defaultMode="system">
-              <ThemedShell>
-                <RootNavigator />
-              </ThemedShell>
-            </ThemeProvider>
-          </SafeAreaProvider>
-        </GestureHandlerRootView>
-      </PersistGate>
-    </StoreProvider>
+    <GoogleAuthProvider>
+      <StoreProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <SafeAreaProvider>
+              <ThemeProvider defaultPalette="ocean" defaultMode="system">
+                <ThemedShell>
+                  <RootNavigator />
+                </ThemedShell>
+              </ThemeProvider>
+            </SafeAreaProvider>
+          </GestureHandlerRootView>
+        </PersistGate>
+      </StoreProvider>
+    </GoogleAuthProvider>
   );
 }

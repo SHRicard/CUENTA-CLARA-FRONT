@@ -5,3 +5,7 @@ export const getTypeDeploy = (): string => {
 export const isDev = (): boolean => {
   return getTypeDeploy() === 'development';
 };
+
+export const getGoogleWebClientId = (): string => {
+  return process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID ?? '';
+};

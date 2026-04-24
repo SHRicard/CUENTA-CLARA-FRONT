@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Divider, Text } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { z } from 'zod';
 
@@ -9,6 +9,7 @@ import { Button, FieldText } from '../../../components';
 import { setCredentials } from '../../../store/auth';
 import { AppDispatch } from '../../../store/store';
 import { useTheme } from '../../../theme';
+import { GoogleSignInButton } from './GoogleSignInButton';
 
 const schema = z.object({
   email: z.string().email('Email inválido'),
@@ -57,6 +58,8 @@ export const Login = () => {
       <Button fullWidth onPress={handleSubmit(onSubmit)}>
         Sign in
       </Button>
+      <Divider />
+      <GoogleSignInButton />
     </View>
   );
 };
