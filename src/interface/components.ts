@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonIconPosition = 'left' | 'right';
 
 export interface ButtonProps {
   variant?: ButtonVariant;
@@ -9,6 +10,7 @@ export interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   icon?: string;
+  iconPosition?: ButtonIconPosition;
   fullWidth?: boolean;
   onPress?: () => void;
   children: ReactNode;

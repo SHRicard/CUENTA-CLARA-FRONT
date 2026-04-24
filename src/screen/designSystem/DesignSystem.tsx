@@ -688,15 +688,58 @@ export const DesignSystem = () => {
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
             <AppButton loading>Loading</AppButton>
             <AppButton disabled>Disabled</AppButton>
-            <AppButton icon="plus">With icon</AppButton>
+          </View>
+        </View>
+
+        <View style={{ gap: theme.spacing.sm }}>
+          <GroupLabel>Icons · left (default)</GroupLabel>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+            <AppButton icon="plus">Crear</AppButton>
+            <AppButton variant="secondary" icon="pencil">
+              Editar
+            </AppButton>
+            <AppButton variant="outline" icon="download">
+              Descargar
+            </AppButton>
+            <AppButton variant="danger" icon="trash-can">
+              Eliminar
+            </AppButton>
+            <AppButton variant="ghost" icon="heart">
+              Me gusta
+            </AppButton>
+          </View>
+        </View>
+
+        <View style={{ gap: theme.spacing.sm }}>
+          <GroupLabel>Icons · right</GroupLabel>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+            <AppButton icon="arrow-right" iconPosition="right">
+              Siguiente
+            </AppButton>
+            <AppButton variant="outline" icon="open-in-new" iconPosition="right">
+              Abrir link
+            </AppButton>
+            <AppButton variant="ghost" icon="chevron-right" iconPosition="right">
+              Ver más
+            </AppButton>
+          </View>
+        </View>
+
+        <View style={{ gap: theme.spacing.sm }}>
+          <GroupLabel>Without icon</GroupLabel>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+            <AppButton>Sin ícono</AppButton>
+            <AppButton variant="outline">También sin ícono</AppButton>
           </View>
         </View>
 
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Full width</GroupLabel>
-          <AppButton fullWidth>Full width primary</AppButton>
-          <AppButton fullWidth variant="outline">
-            Full width outline
+          <AppButton fullWidth icon="check">
+            Confirmar
+          </AppButton>
+          <AppButton fullWidth variant="outline" icon="arrow-right" iconPosition="right">
+            Continuar
           </AppButton>
         </View>
       </Section>

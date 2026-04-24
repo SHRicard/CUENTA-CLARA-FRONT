@@ -29,12 +29,18 @@ export const Button = ({
   loading = false,
   disabled = false,
   icon,
+  iconPosition = 'left',
   fullWidth = false,
   onPress,
   children,
 }: ButtonProps) => {
   const { theme } = useTheme();
   const buttonColor = variant === 'danger' ? theme.colors.error : undefined;
+
+  const contentStyle = {
+    ...PADDING_BY_SIZE[size],
+    flexDirection: iconPosition === 'right' ? ('row-reverse' as const) : ('row' as const),
+  };
 
   return (
     <PaperButton
@@ -45,7 +51,7 @@ export const Button = ({
       onPress={onPress}
       buttonColor={buttonColor}
       style={fullWidth ? { width: '100%' } : undefined}
-      contentStyle={PADDING_BY_SIZE[size]}
+      contentStyle={contentStyle}
       labelStyle={{ fontSize: FONT_SIZE_BY_SIZE[size] }}
     >
       {children}
