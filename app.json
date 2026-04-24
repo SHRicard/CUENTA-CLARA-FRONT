@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "plantilla-rn-front",
-    "slug": "plantilla-rn-front",
+    "name": "Ojo Super",
+    "slug": "ojo-super",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,9 +12,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rricardo.ojosuper"
     },
     "android": {
+      "package": "com.rricardo.ojosuper",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -28,6 +30,11 @@
     "plugins": [
       "expo-secure-store",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "aac93aab-2196-4c9a-a31c-2127746793b8"
+      }
+    }
   }
 }
