@@ -82,8 +82,9 @@ export type PaletteName =
   | 'royal'
   | 'slate'
   | 'mono'
-  | 'crimson'
-  | 'teal';
+  | 'emerald'
+  | 'teal'
+  | 'volt';
 
 export interface ColorScheme {
   primary: string;
@@ -107,6 +108,7 @@ export interface ColorScheme {
 export interface Palette {
   name: string;
   label: string;
+  icon: string;
   description: string;
   light: ColorScheme;
   dark: ColorScheme;

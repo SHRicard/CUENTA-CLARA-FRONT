@@ -255,10 +255,11 @@ export const DesignSystem = () => {
               <Button
                 key={name}
                 compact
+                icon={PALETTES[name].icon}
                 mode={palette === name ? 'contained' : 'outlined'}
                 onPress={() => setPalette(name as PaletteName)}
               >
-                {name}
+                {PALETTES[name].label}
               </Button>
             ))}
           </View>
@@ -280,6 +281,12 @@ export const DesignSystem = () => {
               onPress={() => setMode('dark')}
             />
           </View>
+
+          <Card variant="filled" icon={PALETTES[palette].icon} title={PALETTES[palette].label}>
+            <Text variant="bodyMedium" style={{ color: theme.colors.text }}>
+              {PALETTES[palette].description}
+            </Text>
+          </Card>
         </View>
       </Section>
 
