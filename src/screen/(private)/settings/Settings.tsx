@@ -1,7 +1,7 @@
 import { ScrollView, View } from 'react-native';
 import { Button, SegmentedButtons, Text } from 'react-native-paper';
 
-import { PALETTE_NAMES } from '../../../const';
+import { PALETTE_NAMES, PALETTES } from '../../../const';
 import { ModePreference, PaletteName } from '../../../interface';
 import { useTheme } from '../../../theme';
 
@@ -33,10 +33,11 @@ export const Settings = () => {
         {PALETTE_NAMES.map((name) => (
           <Button
             key={name}
+            icon={PALETTES[name].icon}
             mode={palette === name ? 'contained' : 'outlined'}
             onPress={() => setPalette(name as PaletteName)}
           >
-            {name}
+            {PALETTES[name].label}
           </Button>
         ))}
       </View>

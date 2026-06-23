@@ -11,10 +11,12 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 
+import { api } from './api';
 import { authReducer } from './auth';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  [api.reducerPath]: api.reducer,
 });
 
 const persistConfig = {
@@ -32,7 +34,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(api.middleware),
 });
 
 export const persistor = persistStore(store);
