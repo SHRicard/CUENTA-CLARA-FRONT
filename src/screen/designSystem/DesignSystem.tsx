@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ScrollView, View } from 'react-native';
-import { Button, Divider, Text } from 'react-native-paper';
+import { Pressable, ScrollView, View } from 'react-native';
+import { Button, Divider, Icon, Text } from 'react-native-paper';
 
 import {
   Badge,
@@ -14,7 +14,7 @@ import {
   Select,
 } from '../../components';
 import { useConfirm } from '../../confirm';
-import { PALETTE_NAMES } from '../../const';
+import { PALETTE_NAMES, PALETTES } from '../../const';
 import { ColorScheme, PaletteName } from '../../interface';
 import { useSnackbar } from '../../snackbar';
 import { useTheme } from '../../theme';
@@ -88,6 +88,113 @@ const GroupLabel = ({ children }: { children: ReactNode }) => {
   );
 };
 
+const ThemePreview = ({
+  label,
+  scheme,
+  active,
+  onPress,
+}: {
+  label: string;
+  scheme: ColorScheme;
+  active: boolean;
+  onPress: () => void;
+}) => {
+  const { theme } = useTheme();
+  const dots: { key: ColorKey; color: string }[] = [
+    { key: 'primary', color: scheme.primary },
+    { key: 'secondary', color: scheme.secondary },
+    { key: 'success', color: scheme.success },
+    { key: 'warning', color: scheme.warning },
+    { key: 'error', color: scheme.error },
+    { key: 'info', color: scheme.info },
+  ];
+
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`Tema ${label}`}
+      accessibilityState={{ selected: active }}
+      style={{ flex: 1 }}
+    >
+      <View
+        style={{
+          borderRadius: theme.radius.lg,
+          borderWidth: active ? 2 : 1,
+          borderColor: active ? theme.colors.primary : theme.colors.border,
+          backgroundColor: scheme.background,
+          padding: theme.spacing.sm,
+          gap: theme.spacing.sm,
+          overflow: 'hidden',
+        }}
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text variant="labelLarge" style={{ color: scheme.text }}>
+            {label}
+          </Text>
+          <Icon
+            source={active ? 'check-circle' : 'circle-outline'}
+            size={18}
+            color={active ? scheme.primary : scheme.textMuted}
+          />
+        </View>
+
+        <View
+          style={{
+            backgroundColor: scheme.surface,
+            borderRadius: theme.radius.md,
+            borderWidth: 1,
+            borderColor: scheme.border,
+            padding: theme.spacing.sm,
+            gap: theme.spacing.xs,
+          }}
+        >
+          <Text variant="labelMedium" style={{ color: scheme.text }}>
+            Título
+          </Text>
+          <Text variant="bodySmall" style={{ color: scheme.textMuted }}>
+            Texto secundario
+          </Text>
+
+          <View style={{ flexDirection: 'row', gap: theme.spacing.xs, marginTop: theme.spacing.xs }}>
+            {dots.map((d) => (
+              <View
+                key={d.key}
+                style={{
+                  width: 14,
+                  height: 14,
+                  borderRadius: theme.radius.full,
+                  backgroundColor: d.color,
+                }}
+              />
+            ))}
+          </View>
+
+          <View
+            style={{
+              marginTop: theme.spacing.xs,
+              backgroundColor: scheme.primary,
+              borderRadius: theme.radius.full,
+              paddingVertical: 6,
+              alignItems: 'center',
+            }}
+          >
+            <Text variant="labelSmall" style={{ color: scheme.onPrimary }}>
+              Botón
+            </Text>
+          </View>
+        </View>
+      </View>
+    </Pressable>
+  );
+};
+
 const ColorSwatch = ({ name, color }: { name: string; color: string }) => {
   const { theme } = useTheme();
   return (
@@ -112,7 +219,7 @@ const ColorSwatch = ({ name, color }: { name: string; color: string }) => {
 };
 
 export const DesignSystem = () => {
-  const { theme, palette, setPalette, toggleMode, modePreference } = useTheme();
+  const { theme, palette, setPalette, setMode } = useTheme();
   const { show, showSuccess, showError, showWarning, showInfo } = useSnackbar();
   const { confirm, confirmDelete, confirmDiscard } = useConfirm();
   const [smOpen, setSmOpen] = useState(false);
@@ -141,20 +248,38 @@ export const DesignSystem = () => {
       contentContainerStyle={{ padding: theme.spacing.lg }}
     >
       <Section title="Theme controls">
-        <Button mode="contained-tonal" onPress={toggleMode}>
-          Mode: {modePreference}
-        </Button>
-        <View style={{ flexDirection: 'row', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
-          {PALETTE_NAMES.map((name) => (
-            <Button
-              key={name}
-              compact
-              mode={palette === name ? 'contained' : 'outlined'}
-              onPress={() => setPalette(name as PaletteName)}
-            >
-              {name}
-            </Button>
-          ))}
+        <View style={{ gap: theme.spacing.sm }}>
+          <GroupLabel>Color diseño</GroupLabel>
+          <View style={{ flexDirection: 'row', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
+            {PALETTE_NAMES.map((name) => (
+              <Button
+                key={name}
+                compact
+                mode={palette === name ? 'contained' : 'outlined'}
+                onPress={() => setPalette(name as PaletteName)}
+              >
+                {name}
+              </Button>
+            ))}
+          </View>
+        </View>
+
+        <View style={{ gap: theme.spacing.sm }}>
+          <GroupLabel>Temas</GroupLabel>
+          <View style={{ flexDirection: 'row', gap: theme.spacing.md, alignItems: 'flex-start' }}>
+            <ThemePreview
+              label="Claro"
+              scheme={PALETTES[palette].light}
+              active={theme.mode === 'light'}
+              onPress={() => setMode('light')}
+            />
+            <ThemePreview
+              label="Oscuro"
+              scheme={PALETTES[palette].dark}
+              active={theme.mode === 'dark'}
+              onPress={() => setMode('dark')}
+            />
+          </View>
         </View>
       </Section>
 

@@ -75,7 +75,15 @@ export interface Fonts {
 
 export type Mode = 'light' | 'dark';
 
-export type PaletteName = 'ocean' | 'forest' | 'sunset' | 'royal' | 'slate' | 'mono';
+export type PaletteName =
+  | 'ocean'
+  | 'forest'
+  | 'sunset'
+  | 'royal'
+  | 'slate'
+  | 'mono'
+  | 'crimson'
+  | 'teal';
 
 export interface ColorScheme {
   primary: string;

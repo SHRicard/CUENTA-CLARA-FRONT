@@ -17,6 +17,11 @@ export type FieldTextProps<T extends FieldValues = FieldValues> = Omit<
 > &
   BaseControlledProps<T>;
 
+export type PasswordFieldProps<T extends FieldValues = FieldValues> = Omit<
+  FieldTextProps<T>,
+  'secureTextEntry' | 'right'
+>;
+
 export type CheckboxProps<T extends FieldValues = FieldValues> = BaseControlledProps<T> & {
   label?: string;
   disabled?: boolean;

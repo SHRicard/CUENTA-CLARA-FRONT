@@ -7,3 +7,6 @@ export * from './badge';
 export * from './modal';
 export * from './card';
 export * from './scrollView';
+export * from './logo';
+export * from './logoHorizontal';
+export * from './passwordField';

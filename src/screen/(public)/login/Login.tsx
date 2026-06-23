@@ -1,33 +1,21 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { View } from 'react-native';
-import { Divider, Text } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useDispatch } from 'react-redux';
-import { z } from 'zod';
 
-import { Button, FieldText } from '../../../components';
+import { LoginTemplate } from '../../../components';
+import { Credentials, LoginFormData, PublicStackParamList } from '../../../interface';
+import { useSnackbar } from '../../../snackbar';
 import { setCredentials } from '../../../store/auth';
 import { AppDispatch } from '../../../store/store';
-import { useTheme } from '../../../theme';
-import { GoogleSignInButton } from './GoogleSignInButton';
 
-const schema = z.object({
-  email: z.string().email('Email inválido'),
-  password: z.string().min(6, 'Mínimo 6 caracteres'),
-});
-
-type LoginForm = z.infer<typeof schema>;
+type Nav = NativeStackNavigationProp<PublicStackParamList, 'Login'>;
 
 export const Login = () => {
+  const navigation = useNavigation<Nav>();
   const dispatch = useDispatch<AppDispatch>();
-  const { theme } = useTheme();
+  const { showError } = useSnackbar();
 
-  const { control, handleSubmit } = useForm<LoginForm>({
-    resolver: zodResolver(schema),
-    defaultValues: { email: '', password: '' },
-  });
-
-  const onSubmit = (data: LoginForm) => {
+  const onLogin = (data: LoginFormData) => {
     dispatch(
       setCredentials({
         user: { id: '1', email: data.email, name: data.email.split('@')[0] || 'User' },
@@ -36,30 +24,17 @@ export const Login = () => {
     );
   };
 
+  const onGoogleSuccess = (credentials: Credentials) => {
+    dispatch(setCredentials(credentials));
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        padding: theme.spacing.lg,
-        gap: theme.spacing.md,
-        backgroundColor: theme.colors.background,
-      }}
-    >
-      <Text variant="headlineMedium">Sign in</Text>
-      <FieldText
-        control={control}
-        name="email"
-        label="Email"
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <FieldText control={control} name="password" label="Password" secureTextEntry />
-      <Button fullWidth onPress={handleSubmit(onSubmit)}>
-        Sign in
-      </Button>
-      <Divider />
-      <GoogleSignInButton />
-    </View>
+    <LoginTemplate
+      onLogin={onLogin}
+      onGoogleSuccess={onGoogleSuccess}
+      onGoogleError={(message) => showError(message)}
+      onForgotPassword={() => navigation.navigate('ForgotPassword')}
+      onRegister={() => navigation.navigate('Register')}
+    />
   );
 };

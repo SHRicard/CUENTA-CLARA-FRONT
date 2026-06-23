@@ -6,6 +6,8 @@ export type RootStackParamList = {
 
 export type PublicStackParamList = {
   Login: undefined;
+  ForgotPassword: undefined;
+  Register: undefined;
 };
 
 export type PrivateTabParamList = {
