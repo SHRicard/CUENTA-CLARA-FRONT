@@ -1,7 +1,8 @@
 import { ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, View } from 'react-native';
-import { Button, Divider, Icon, Text } from 'react-native-paper';
+import { Button, Divider, Icon, SegmentedButtons, Text } from 'react-native-paper';
 
 import {
   Badge,
@@ -15,6 +16,7 @@ import {
 } from '../../components';
 import { useConfirm } from '../../confirm';
 import { PALETTE_NAMES, PALETTES } from '../../const';
+import { Language, useLanguage } from '../../i18n';
 import { ColorScheme, PaletteName } from '../../interface';
 import { useSnackbar } from '../../snackbar';
 import { useTheme } from '../../theme';
@@ -220,6 +222,8 @@ const ColorSwatch = ({ name, color }: { name: string; color: string }) => {
 
 export const DesignSystem = () => {
   const { theme, palette, setPalette, setMode } = useTheme();
+  const { t: translate } = useTranslation();
+  const { language, setLanguage, languages } = useLanguage();
   const { show, showSuccess, showError, showWarning, showInfo } = useSnackbar();
   const { confirm, confirmDelete, confirmDiscard } = useConfirm();
   const [smOpen, setSmOpen] = useState(false);
@@ -247,9 +251,18 @@ export const DesignSystem = () => {
       style={{ flex: 1, backgroundColor: theme.colors.background }}
       contentContainerStyle={{ padding: theme.spacing.lg }}
     >
-      <Section title="Theme controls">
+      <Section title={translate('designSystem.themeControls')}>
         <View style={{ gap: theme.spacing.sm }}>
-          <GroupLabel>Color diseño</GroupLabel>
+          <GroupLabel>{translate('settings.language')}</GroupLabel>
+          <SegmentedButtons
+            value={language}
+            onValueChange={(v) => setLanguage(v as Language)}
+            buttons={languages.map((lng) => ({ value: lng, label: translate(`languages.${lng}`) }))}
+          />
+        </View>
+
+        <View style={{ gap: theme.spacing.sm }}>
+          <GroupLabel>{translate('designSystem.designColor')}</GroupLabel>
           <View style={{ flexDirection: 'row', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
             {PALETTE_NAMES.map((name) => (
               <Button
@@ -266,16 +279,16 @@ export const DesignSystem = () => {
         </View>
 
         <View style={{ gap: theme.spacing.sm }}>
-          <GroupLabel>Temas</GroupLabel>
+          <GroupLabel>{translate('designSystem.themes')}</GroupLabel>
           <View style={{ flexDirection: 'row', gap: theme.spacing.md, alignItems: 'flex-start' }}>
             <ThemePreview
-              label="Claro"
+              label={translate('settings.light')}
               scheme={PALETTES[palette].light}
               active={theme.mode === 'light'}
               onPress={() => setMode('light')}
             />
             <ThemePreview
-              label="Oscuro"
+              label={translate('settings.dark')}
               scheme={PALETTES[palette].dark}
               active={theme.mode === 'dark'}
               onPress={() => setMode('dark')}
@@ -290,7 +303,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="Colors">
+      <Section title={translate('designSystem.colors')}>
         {COLOR_GROUPS.map((group) => (
           <View key={group.label} style={{ gap: theme.spacing.sm }}>
             <GroupLabel>{group.label}</GroupLabel>
@@ -303,7 +316,7 @@ export const DesignSystem = () => {
         ))}
       </Section>
 
-      <Section title="Typography">
+      <Section title={translate('designSystem.typography')}>
         {TYPO_GROUPS.map((group) => (
           <View key={group.label} style={{ gap: theme.spacing.xs }}>
             <GroupLabel>{group.label}</GroupLabel>
@@ -330,7 +343,7 @@ export const DesignSystem = () => {
         ))}
       </Section>
 
-      <Section title="Fonts">
+      <Section title={translate('designSystem.fonts')}>
         {(['inter', 'quicksand', 'lato'] as const).map((family) => {
           const weights = Object.keys(
             theme.fonts[family],
@@ -361,7 +374,7 @@ export const DesignSystem = () => {
         })}
       </Section>
 
-      <Section title="Spacing">
+      <Section title={translate('designSystem.spacing')}>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.md }}>
           {(['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const).map((key) => (
             <View key={key} style={{ alignItems: 'center', minWidth: 60, gap: 4 }}>
@@ -384,7 +397,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="Radius">
+      <Section title={translate('designSystem.radius')}>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.md }}>
           {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((key) => (
             <View key={key} style={{ alignItems: 'center', minWidth: 60, gap: 4 }}>
@@ -407,7 +420,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="Atom · FieldText">
+      <Section title={translate('designSystem.atomFieldText')}>
         <FieldText control={control} name="demo" label="Default" placeholder="Type here" />
         <FieldText
           control={control}
@@ -417,7 +430,7 @@ export const DesignSystem = () => {
         />
       </Section>
 
-      <Section title="Atom · Checkbox">
+      <Section title={translate('designSystem.atomCheckbox')}>
         <Checkbox control={control} name="accept" label="Accept terms and conditions" />
         <Checkbox
           control={control}
@@ -428,7 +441,7 @@ export const DesignSystem = () => {
         />
       </Section>
 
-      <Section title="Atom · Select">
+      <Section title={translate('designSystem.atomSelect')}>
         <Select
           control={control}
           name="country"
@@ -444,7 +457,7 @@ export const DesignSystem = () => {
         />
       </Section>
 
-      <Section title="Atom · DatePicker">
+      <Section title={translate('designSystem.atomDatePicker')}>
         <DatePicker
           control={control}
           name="birthday"
@@ -453,7 +466,7 @@ export const DesignSystem = () => {
         />
       </Section>
 
-      <Section title="System · Confirm">
+      <Section title={translate('designSystem.systemConfirm')}>
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Presets</GroupLabel>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
@@ -520,7 +533,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="System · Snackbar">
+      <Section title={translate('designSystem.systemSnackbar')}>
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Variants</GroupLabel>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
@@ -599,7 +612,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="Atom · Modal">
+      <Section title={translate('designSystem.atomModal')}>
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Sizes</GroupLabel>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
@@ -681,7 +694,7 @@ export const DesignSystem = () => {
         </Modal>
       </Section>
 
-      <Section title="Atom · Badge">
+      <Section title={translate('designSystem.atomBadge')}>
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Variants</GroupLabel>
           <View
@@ -787,7 +800,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="Atom · Button">
+      <Section title={translate('designSystem.atomButton')}>
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Variants</GroupLabel>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
@@ -876,7 +889,7 @@ export const DesignSystem = () => {
         </View>
       </Section>
 
-      <Section title="Atom · Card">
+      <Section title={translate('designSystem.atomCard')}>
         <View style={{ gap: theme.spacing.sm }}>
           <GroupLabel>Variants</GroupLabel>
           <Card
