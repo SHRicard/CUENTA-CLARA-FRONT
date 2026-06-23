@@ -1,0 +1,41 @@
+{
+  "common": {
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "save": "Save",
+    "accept": "Accept"
+  },
+  "settings": {
+    "title": "Settings",
+    "mode": "Mode",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "palette": "Palette",
+    "language": "Language"
+  },
+  "languages": {
+    "es": "Spanish",
+    "en": "English"
+  },
+  "designSystem": {
+    "themeControls": "Theme controls",
+    "designColor": "Design color",
+    "themes": "Themes",
+    "colors": "Colors",
+    "typography": "Typography",
+    "fonts": "Fonts",
+    "spacing": "Spacing",
+    "radius": "Radius",
+    "atomFieldText": "Atom · FieldText",
+    "atomCheckbox": "Atom · Checkbox",
+    "atomSelect": "Atom · Select",
+    "atomDatePicker": "Atom · DatePicker",
+    "systemConfirm": "System · Confirm",
+    "systemSnackbar": "System · Snackbar",
+    "atomModal": "Atom · Modal",
+    "atomBadge": "Atom · Badge",
+    "atomButton": "Atom · Button",
+    "atomCard": "Atom · Card"
+  }
+}

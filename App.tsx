@@ -2,7 +2,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { en, registerTranslation } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -13,6 +13,7 @@ import { ConfirmProvider } from './src/confirm';
 import { DesignSystemFab } from './src/devTools';
 import { buildNavTheme, buildPaperTheme } from './src/helpers';
 import { useAppFonts } from './src/hooks';
+import { loadPersistedLanguage } from './src/i18n';
 import { navigationRef, RootNavigator } from './src/router';
 import { configureGoogleSignIn, GoogleAuthProvider } from './src/service';
 import { SnackbarProvider } from './src/snackbar';
@@ -46,14 +47,19 @@ const ThemedShell = ({ children }: { children: ReactNode }) => {
 
 export default function App() {
   const [fontsLoaded, fontsError] = useAppFonts();
+  const [langReady, setLangReady] = useState(false);
 
   useEffect(() => {
-    if (fontsLoaded || fontsError) {
+    loadPersistedLanguage().finally(() => setLangReady(true));
+  }, []);
+
+  useEffect(() => {
+    if ((fontsLoaded || fontsError) && langReady) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontsError]);
+  }, [fontsLoaded, fontsError, langReady]);
 
-  if (!fontsLoaded && !fontsError) {
+  if ((!fontsLoaded && !fontsError) || !langReady) {
     return null;
   }
 
