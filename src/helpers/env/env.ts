@@ -1,3 +1,7 @@
+export const getAppName = (): string => {
+  return process.env.EXPO_PUBLIC_NAME_APP ?? 'CUENTA CLARA';
+};
+
 export const getTypeDeploy = (): string => {
   return process.env.EXPO_PUBLIC_TYPE_DEPLOY ?? 'production';
 };

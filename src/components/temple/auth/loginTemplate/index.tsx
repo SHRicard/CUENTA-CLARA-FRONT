@@ -3,7 +3,7 @@ import { Text } from 'react-native-paper';
 
 import { useKeyboardVisible } from '../../../../hooks';
 import { useTheme } from '../../../../theme';
-import { Logo, LogoHorizontal } from '../../../atoms';
+import { LogoSvg, LogoHorizontal } from '../../../atoms';
 import { AuthDivider, AuthLinks, GoogleSignInButton, LoginForm } from '../../../molecules';
 import { LoginTemplateProps } from './types';
 
@@ -32,7 +32,7 @@ export const LoginTemplate = ({
         </View>
       ) : (
         <View style={{ alignItems: 'center', gap: theme.spacing.sm }}>
-          <Logo size="md" />
+          <LogoSvg size="md" />
           <Text variant="headlineSmall" style={{ color: theme.colors.text }}>
             Bienvenido
           </Text>
