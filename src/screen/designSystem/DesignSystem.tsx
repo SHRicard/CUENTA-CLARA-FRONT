@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, View } from 'react-native';
-import { Button, Divider, Icon, SegmentedButtons, Text } from 'react-native-paper';
+import { Divider, Icon, SegmentedButtons, Text } from 'react-native-paper';
 
 import {
   Badge,
@@ -15,9 +15,9 @@ import {
   Select,
 } from '../../components';
 import { useConfirm } from '../../confirm';
-import { PALETTE_NAMES, PALETTES } from '../../const';
+import { PALETTES } from '../../const';
 import { Language, useLanguage } from '../../i18n';
-import { ColorScheme, PaletteName } from '../../interface';
+import { ColorScheme } from '../../interface';
 import { useSnackbar } from '../../snackbar';
 import { useTheme } from '../../theme';
 
@@ -221,7 +221,7 @@ const ColorSwatch = ({ name, color }: { name: string; color: string }) => {
 };
 
 export const DesignSystem = () => {
-  const { theme, palette, setPalette, setMode } = useTheme();
+  const { theme, palette, setMode } = useTheme();
   const { t: translate } = useTranslation();
   const { language, setLanguage, languages } = useLanguage();
   const { show, showSuccess, showError, showWarning, showInfo } = useSnackbar();
@@ -259,23 +259,6 @@ export const DesignSystem = () => {
             onValueChange={(v) => setLanguage(v as Language)}
             buttons={languages.map((lng) => ({ value: lng, label: translate(`languages.${lng}`) }))}
           />
-        </View>
-
-        <View style={{ gap: theme.spacing.sm }}>
-          <GroupLabel>{translate('designSystem.designColor')}</GroupLabel>
-          <View style={{ flexDirection: 'row', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
-            {PALETTE_NAMES.map((name) => (
-              <Button
-                key={name}
-                compact
-                icon={PALETTES[name].icon}
-                mode={palette === name ? 'contained' : 'outlined'}
-                onPress={() => setPalette(name as PaletteName)}
-              >
-                {PALETTES[name].label}
-              </Button>
-            ))}
-          </View>
         </View>
 
         <View style={{ gap: theme.spacing.sm }}>

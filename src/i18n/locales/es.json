@@ -11,7 +11,6 @@
     "light": "Claro",
     "dark": "Oscuro",
     "system": "Sistema",
-    "palette": "Paleta",
     "language": "Idioma"
   },
   "languages": {
@@ -20,7 +19,6 @@
   },
   "designSystem": {
     "themeControls": "Controles de tema",
-    "designColor": "Color diseño",
     "themes": "Temas",
     "colors": "Colores",
     "typography": "Tipografía",
