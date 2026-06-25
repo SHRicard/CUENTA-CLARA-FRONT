@@ -30,6 +30,7 @@
     "@react-oauth/google": "^0.13.5",
     "@reduxjs/toolkit": "^2.11.2",
     "date-fns": "^4.1.0",
+    "eas-cli": "^20.3.0",
     "expo": "^55.0.0",
     "expo-camera": "~55.0.16",
     "expo-constants": "~55.0.15",
