@@ -1,8 +1,9 @@
 import { Pressable, ScrollView, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+import { getAppName } from '../../../../helpers';
 import { useTheme } from '../../../../theme';
-import { Logo } from '../../../atoms';
+import { LogoSvg } from '../../../atoms';
 import { RegisterForm } from '../../../molecules';
 import { RegisterTemplateProps } from './types';
 
@@ -20,12 +21,12 @@ export const RegisterTemplate = ({ onSubmit, onBack, loading }: RegisterTemplate
           padding: theme.spacing.xl,
         }}
       >
-        <Logo size="lg" variant="light" />
+        <LogoSvg size="lg" variant="light" />
         <Text
           variant="headlineMedium"
           style={{ color: theme.colors.onPrimary, marginTop: theme.spacing.lg, textAlign: 'center' }}
         >
-          Ojo Super
+          {getAppName()}
         </Text>
         <Text
           variant="bodyLarge"
@@ -50,7 +51,7 @@ export const RegisterTemplate = ({ onSubmit, onBack, loading }: RegisterTemplate
             Crear cuenta
           </Text>
           <Text variant="bodyMedium" style={{ color: theme.colors.textMuted }}>
-            Comienza tu experiencia con Ojo Super
+            Comienza tu experiencia con {getAppName()}
           </Text>
         </View>
 

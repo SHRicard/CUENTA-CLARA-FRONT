@@ -1,7 +1,7 @@
 const sharp = require('sharp');
 const path = require('path');
 
-const SOURCE = path.join(__dirname, '..', 'assets', 'logo-ojo-super-light.svg');
+const SOURCE = path.join(__dirname, '..', 'assets', 'CUENTA-CLARA.svg');
 const ASSETS = path.join(__dirname, '..', 'assets');
 
 const BG = { r: 0, g: 0, b: 0, alpha: 1 };

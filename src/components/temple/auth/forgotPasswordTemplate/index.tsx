@@ -3,7 +3,7 @@ import { Text } from 'react-native-paper';
 
 import { useKeyboardVisible } from '../../../../hooks';
 import { useTheme } from '../../../../theme';
-import { Logo, LogoHorizontal } from '../../../atoms';
+import { LogoSvg, LogoHorizontal } from '../../../atoms';
 import { ForgotPasswordForm } from '../../../molecules';
 import { ForgotPasswordTemplateProps } from './types';
 
@@ -25,7 +25,7 @@ export const ForgotPasswordTemplate = ({ onSubmit, onBack, loading, sent }: Forg
         </View>
       ) : (
         <View style={{ alignItems: 'center', gap: theme.spacing.sm }}>
-          <Logo size="sm" />
+          <LogoSvg size="sm" />
           <Text variant="headlineSmall" style={{ color: theme.colors.text }}>
             Recuperar contraseña
           </Text>
