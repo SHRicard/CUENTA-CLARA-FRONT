@@ -1,14 +1,10 @@
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+import { getAppName } from '../../../../helpers';
 import { useTheme } from '../../../../theme';
-import { Logo } from '../../../atoms';
-import {
-  AuthDivider,
-  AuthLinks,
-  GoogleSignInButton,
-  LoginForm,
-} from '../../../molecules';
+import { LogoSvg } from '../../../atoms';
+import { AuthDivider, AuthLinks, GoogleSignInButton, LoginForm } from '../../../molecules';
 import { LoginTemplateProps } from './types';
 
 export const LoginTemplate = ({
@@ -32,16 +28,25 @@ export const LoginTemplate = ({
           padding: theme.spacing.xl,
         }}
       >
-        <Logo size="lg" variant="light" />
+        <LogoSvg size="lg" variant="light" />
         <Text
           variant="headlineMedium"
-          style={{ color: theme.colors.onPrimary, marginTop: theme.spacing.lg, textAlign: 'center' }}
+          style={{
+            color: theme.colors.onPrimary,
+            marginTop: theme.spacing.lg,
+            textAlign: 'center',
+          }}
         >
-          Ojo Super
+          {getAppName()}
         </Text>
         <Text
           variant="bodyLarge"
-          style={{ color: theme.colors.onPrimary, opacity: 0.85, marginTop: theme.spacing.sm, textAlign: 'center' }}
+          style={{
+            color: theme.colors.onPrimary,
+            opacity: 0.85,
+            marginTop: theme.spacing.sm,
+            textAlign: 'center',
+          }}
         >
           Tu visión, en un solo lugar
         </Text>

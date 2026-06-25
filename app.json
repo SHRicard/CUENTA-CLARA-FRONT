@@ -1,41 +1,50 @@
 {
   "expo": {
-    "name": "Ojo Super",
-    "slug": "ojo-super",
+    "slug": "cuenta-clara",
+    "name": "Cuentas Claras",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
-    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rricardo.ojosuper"
+      "bundleIdentifier": "com.rricardo.cuenta.clara"
     },
     "android": {
-      "package": "com.rricardo.ojosuper",
+      "package": "com.rricardo.cuenta.clara",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/CUENTA-CLARA.png",
         "backgroundColor": "#000000"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo.png"
     },
     "plugins": [
       "expo-secure-store",
       "expo-font",
       "@react-native-google-signin/google-signin",
-      "expo-localization"
+      "expo-localization",
+      "@react-native-vector-icons/material-design-icons",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-blanco.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "enableFullScreenImage_legacy": true,
+          "dark": {
+            "image": "./assets/splash-oscuro.png",
+            "backgroundColor": "#12121c"
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {
-        "projectId": "aac93aab-2196-4c9a-a31c-2127746793b8"
+        "projectId": "ba935f89-ce59-4a09-b97e-7d16fb433396"
       }
     }
   }

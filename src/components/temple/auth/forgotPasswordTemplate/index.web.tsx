@@ -1,12 +1,18 @@
 import { Pressable, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+import { getAppName } from '../../../../helpers';
 import { useTheme } from '../../../../theme';
-import { Logo } from '../../../atoms';
+import { LogoPng } from '../../../atoms';
 import { ForgotPasswordForm } from '../../../molecules';
 import { ForgotPasswordTemplateProps } from './types';
 
-export const ForgotPasswordTemplate = ({ onSubmit, onBack, loading, sent }: ForgotPasswordTemplateProps) => {
+export const ForgotPasswordTemplate = ({
+  onSubmit,
+  onBack,
+  loading,
+  sent,
+}: ForgotPasswordTemplateProps) => {
   const { theme } = useTheme();
 
   return (
@@ -20,16 +26,25 @@ export const ForgotPasswordTemplate = ({ onSubmit, onBack, loading, sent }: Forg
           padding: theme.spacing.xl,
         }}
       >
-        <Logo size="lg" variant="light" />
+        <LogoPng size="lg" />
         <Text
           variant="headlineMedium"
-          style={{ color: theme.colors.onPrimary, marginTop: theme.spacing.lg, textAlign: 'center' }}
+          style={{
+            color: theme.colors.onPrimary,
+            marginTop: theme.spacing.lg,
+            textAlign: 'center',
+          }}
         >
-          Ojo Super
+          {getAppName()}
         </Text>
         <Text
           variant="bodyLarge"
-          style={{ color: theme.colors.onPrimary, opacity: 0.85, marginTop: theme.spacing.sm, textAlign: 'center' }}
+          style={{
+            color: theme.colors.onPrimary,
+            opacity: 0.85,
+            marginTop: theme.spacing.sm,
+            textAlign: 'center',
+          }}
         >
           Tu visión, en un solo lugar
         </Text>
